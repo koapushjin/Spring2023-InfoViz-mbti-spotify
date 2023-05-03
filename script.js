@@ -6,6 +6,7 @@ let dimension1 = false;
 let dimension2 = false;
 let dimension3 = false;
 let dimension4 = false;
+let activeButton = 0;
 
 
 // SVG
@@ -72,6 +73,9 @@ d3.json("countries.geojson").then(function (geoData) {
         .on("mouseout", mouseOutCountry)
 
     }
+
+
+
 
     function draw1() {
       // PRINT DATA
@@ -297,90 +301,103 @@ d3.json("countries.geojson").then(function (geoData) {
 
     }
 
+
     function mouseOverCountry(d, i) {
+      var colors = ['red', 'orange', 'green', 'blue'];
+      var intj = ['I', 'N', 'T', 'J'];
       let value = incomingData.filter(e => {
         return e.country === d.properties.name;
       })[0].value
 
-      d3.select('#tooltip')
-        .style('left', (d3.event.pageX + 10) + 'px')
+
+      var tooltip = d3.select('#tooltip');
+
+
+      tooltip.style('left', (d3.event.pageX + 10) + 'px')
         .style('top', (d3.event.pageY - 25) + 'px')
-        // .style('display', 'inline-block')
-        .html(function drawPie() {
-          var data = [value, 1 - value];
+        .style('display', 'inline-block');
 
-          var svg = d3.select("svg"),
-            width = svg.attr("width"),
-            height = svg.attr("height"),
-            radius = Math.min(width, height) / 2,
-            g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+      tooltip.append('p')
+        .html(`<b>${d.properties.name}</b> <br>
+        ${intj[activeButton]}: ${(value * 100).toFixed(0)}%
+        `);
 
-          var color = d3.scaleOrdinal().range(['black', 'darkgrey']);
+      var pieContainer = tooltip.append('div')
+        .attr('class', 'pie-container');
 
-          // Generate the pie
-          var pie = d3.pie();
-          // Generate the arcs
-          var arc = d3.arc()
-            .innerRadius(0)
-            .outerRadius(radius);
-          //Generate groups
-          var arcs = g.selectAll("arc")
-            .data(pie(data))
-            .enter()
-            .append("g")
-            .attr("class", "arc")
-          //Draw arc paths
-          arcs.append("path")
-            .attr("fill", function (d, i) {
-              return color(i);
-            })
-            .attr("d", arc);
-          //Display lable - value
-          arcs.append("text")
-            .attr("transform", function (d) {
-              return "translate(" + arc.centroid(d) + ")";
-            })
-            .text(function (d) {
-              return d.value.toFixed(2);
-            })
-            .style("fill", 'white')
-            .style("font-size", 15);
+      var svg = pieContainer.append('svg')
+        .attr('class', 'pie')
+        .attr('width', 100)
+        .attr('height', 100)
+        .append('g')
+        .attr('transform', 'translate(50,50)');
+
+      var data = [value, 1 - value];
+
+      var color = d3.scaleOrdinal().range([colors[activeButton], 'grey']);
+
+      // Generate the pie
+      var pie = d3.pie();
+      // Generate the arcs
+      var arc = d3.arc()
+        .innerRadius(0)
+        .outerRadius(50);
+      //Generate groups
+      var arcs = svg.selectAll("arc")
+        .data(pie(data))
+        .enter()
+        .append("g")
+        .attr("class", "arc")
+      //Draw arc paths
+      arcs.append("path")
+        .attr("fill", function (d, i) {
+          return color(i);
         })
+        .attr("d", arc);
+      //Display lable - value
+      arcs.append("text")
+        .attr("transform", function (d) {
+          return "translate(" + arc.centroid(d) + ")";
+        })
+        .text(function (d) {
+          return (d.value * 100).toFixed(0) + '%'
+        })
+        .style("fill", 'white')
+        .style("font-size", 15);
 
-      d3.select('#tooltip')
-        .style('left', (d3.event.pageX + 10) + 'px')
-        .style('top', (d3.event.pageY - 25) + 'px')
-        .style('display', 'inline-block')
-        .html(`
-          <p>
-          <b>${d.properties.name}</b>
-          <br>${value.toFixed(2,true)}
-          </p>
-          `)
     }
 
     function mouseOutCountry(d, i) {
+      d3.select('#tooltip svg').remove();
+      d3.select('#tooltip p').remove();
+      // d3.select('#tooltip p1').remove();
       d3.select('#tooltip')
-        .style('display', 'none')
-      // d3.select("svg")
-      //   .style('display', 'none')
+        .style('display', 'none');
+
     }
 
+
     document.getElementById("button1").addEventListener("click", function () {
+      activeButton = 0;
       draw1();
     });
 
     document.getElementById("button2").addEventListener("click", function () {
+      activeButton = 1;
       draw2();
     });
 
     document.getElementById("button3").addEventListener("click", function () {
+      activeButton = 2;
       draw3();
     });
 
     document.getElementById("button4").addEventListener("click", function () {
+      activeButton = 3;
       draw4();
     });
+
+
 
     let lat = 31.22773;
     let lon = 121.52946;
