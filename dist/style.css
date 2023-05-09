@@ -1,0 +1,78 @@
+body {
+  background-color: #e9e7e7;
+  ;
+  text-align: center;
+  margin-top: 30px;
+}
+/* #wrapper {
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: auto;
+  width:1280px;
+} */
+#bar-title {
+  position: absolute;
+  left: 45%;
+  top: 1330px;
+}
+
+#barchart {
+  position: absolute;
+  top: 1550px;
+  left: 44%;
+  transform: translateX(-50%);
+  transform: translateY(-50%);
+}
+
+/* #selectButton1 {
+  position: absolute;
+  left: 70%;
+  top: 145%;
+}
+
+#selectButton {
+  position: absolute;
+  left: 65%;
+  top: 145%;
+} */
+
+
+#tooltip {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  box-shadow: -3px 3px 15px #939393;
+  padding: 3px;
+  max-width: 100px;
+}
+
+
+.intro {
+  text-align: left;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.button-text {
+  text-align: left;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+h2 {
+  color: black;
+  /* display: flex; */
+  /* font-family: Texturina; */
+  font-size: 40px;
+  margin-bottom: 0;
+  margin-top: 40px;
+}
+
+
+p {
+  color: black;
+  /* display: flex; */
+  /* font-family: Texturina; */
+  font-size: 20px;
+  margin-bottom: 20px;
+}
