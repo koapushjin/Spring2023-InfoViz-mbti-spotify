@@ -6,6 +6,6 @@ In this project, we propose a visualization system that organically shows the mu
 
 - View [live project](https://koapushjin.github.io/Spring2023-InfoViz-mbti-spotify/) here
 - Read [full report](https://github.com/koapushjin/Spring2023-InfoViz-mbti-spotify/blob/main/FinalReport.pdf) here
-- Main datasets from Kaggle: [Country Wise MBTI Personality](https://www.kaggle.com/code/rajjain/country-wise-mbti-personality), [Spotify MBTI Playlists](https://www.kaggle.com/datasets/xtrnglc/spotify-mbti-playlists)
+- Raw data from Kaggle: [Country Wise MBTI Personality](https://www.kaggle.com/code/rajjain/country-wise-mbti-personality), [Spotify MBTI Playlists](https://www.kaggle.com/datasets/xtrnglc/spotify-mbti-playlists)
 
 Group Member: Tian JIN, Shan LU, Jade ZHOU.
